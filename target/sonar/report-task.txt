@@ -1,0 +1,6 @@
+projectKey=in.samapth:Miniproject-02
+serverUrl=http://52.23.227.62:9000
+serverVersion=9.9.4.87374
+dashboardUrl=http://52.23.227.62:9000/dashboard?id=in.samapth%3AMiniproject-02
+ceTaskId=AY78w4A4lh2fK5AMwil-
+ceTaskUrl=http://52.23.227.62:9000/api/ce/task?id=AY78w4A4lh2fK5AMwil-

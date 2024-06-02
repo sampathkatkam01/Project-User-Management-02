@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Register</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+	<div class="container">
+		<form th:action="@{/register}" th:object="${registerDto}" method="post">
+
+			<h1>Register Here</h1>
+
+			<font color="red">
+				<p th:text="${emsg}" />
+			</font>
+			<font color="green">
+				<p th:text="${smsg}" />
+			</font>
+			<table>
+				<tr>
+					<td>Name :</td>
+					<td><input type="text" th:field="*{name}" required /></td>
+				</tr>
+				<tr>
+					<td>Email :</td>
+					<td><input type="email" th:field="*{email}" /></td>
+				</tr>
+				<tr>
+					<td>Phonenumber :</td>
+					<td><input type="tel" th:field="*{phonenumber}" required /></td>
+				</tr>
+				<tr>
+					<td>Country :</td>
+					<td>
+						<select th:field="*{countryid}" id="CountryId" class="form-select" required>
+							<option value="">-Select-</option>
+							<option th:each="entry : ${countries}" th:value="${entry.key}" th:text="${entry.value}">
+							</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>State :</td>
+					<td>
+						<select th:field="*{stateid}" id="stateid" class="form-select" required>
+							<option value="">-Select-</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>City :</td>
+					<td>
+						<select th:field="*{cityid}" id="cityid" class="form-select" required>
+							<option value="">-Select-</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="SignUp" class="btn btn-danger" /></td>
+				</tr>
+			</table>
+			<p>Already Have Account ?<a href="/">Login</a></p>
+		</form>
+	</div>
+
+	<script src="/webjars/jquery/3.6.4/jquery.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$("#CountryId").on("change", function () {
+				$('#stateid').find('option').remove();
+				$('#cityid').find('option').remove();
+				$('<option>').val('').text('-Select-').appendTo("#stateid");
+				$('<option>').val('').text('-Select-').appendTo("#cityid");
+				var cid = $('#CountryId').val();  // Corrected here
+				if (cid) {
+					$.ajax({
+						type: 'GET',
+						url: '/states/' + cid,
+						success: function (response) {
+							$.each(response, function (key, value) {
+								$('<option>').val(key).text(value).appendTo("#stateid");
+							});
+						}
+					});
+				}
+			});
+
+			$("#stateid").on("change", function () {
+				$('#cityid').find('option').remove();
+				$('<option>').val('').text('-Select-').appendTo("#cityid");
+				var sid = $('#stateid').val();
+				if (sid) {
+					$.ajax({
+						type: 'GET',
+						url: '/cities/' + sid,
+						success: function (response) {
+							$.each(response, function (key, value) {
+								$('<option>').val(key).text(value).appendTo("#cityid");
+							});
+						}
+					});
+				}
+			});
+		});
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

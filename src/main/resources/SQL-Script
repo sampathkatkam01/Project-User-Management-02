@@ -1,0 +1,26 @@
+insert into country values(1,'India');
+insert into country values(2,'UnitedStatesOfAmerica');
+insert into country values(3,'Germany');
+
+insert into state values(1,'Telangana',1);
+insert into state values(2,'AndhraPradesh',1);
+insert into state values(3,'Texas',2);
+insert into state values(4,'California',2);
+insert into state values(5,'Bavaria',3);
+insert into state values(6,'NorthRphine-Westphalia',3);
+
+insert into city values(1,'Hyderabad',1);
+insert into city values(2,'Warangal',1);
+insert into city values(3,'Tirupati',2);
+insert into city values(4,'Kadapa',2);
+insert into city values(5,'Houston',3);
+insert into city values(6,'Austin',3);
+insert into city values(7,'LosAngeles',4);
+insert into city values(8,'SanFrancisco',4);
+insert into city values(9,'Regensburg',5);
+insert into city values(10,'Bomberg',5);
+insert into city values(11,'Aachen',6);
+insert into city values(12,'Bochum',6);
+
+
+
